@@ -1,0 +1,15 @@
+server/
+node_modules/
+*.log
+package-lock.json
+package.json
+seed.js
+setup.bat
+setup.sh
+TODO.md
+PROJECT_SUMMARY.md
+DEPLOYMENT_GUIDE.md
+QUICK_START.md
+README.md
+.github/
+.qodo/
