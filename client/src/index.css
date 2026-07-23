@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+}
+
+.gradient-text {
+  @apply bg-gradient-to-r from-gold-500 via-gold-400 to-gold-600 bg-clip-text text-transparent;
+}
+
+.card-shadow {
+  @apply shadow-md hover:shadow-xl transition-shadow duration-300;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-gold-500 text-white font-semibold rounded-lg hover:bg-gold-600 transition-colors duration-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-gray-800 dark:bg-gray-100 text-white dark:text-gray-900 font-semibold rounded-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition-colors duration-300;
+}
+
+.section-padding {
+  @apply py-16 md:py-20;
+}
+
+.container-custom {
+  @apply px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl;
+}

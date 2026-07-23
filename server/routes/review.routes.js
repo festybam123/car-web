@@ -1,0 +1,12 @@
+import express from 'express';
+import { createReview, getCarReviews, updateReview, deleteReview } from '../controllers/reviewController.js';
+import { authenticate } from '../middleware/auth.js';
+
+const router = express.Router();
+
+router.post('/', authenticate, createReview);
+router.get('/car/:carId', getCarReviews);
+router.put('/:id', authenticate, updateReview);
+router.delete('/:id', authenticate, deleteReview);
+
+export default router;
