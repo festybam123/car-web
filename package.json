@@ -2,7 +2,7 @@
   "name": "festybam-motors",
   "version": "1.0.0",
   "description": "festybam Motors - Premium Car Dealership MERN Stack",
-  "main": "server/server.js",
+  "private": true,
   "type": "module",
   "workspaces": [
     "server",
@@ -26,6 +26,10 @@
   ],
   "author": "festybam Motors",
   "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@9.0.0",
   "devDependencies": {
     "concurrently": "^8.2.2"
   }
