@@ -2,11 +2,6 @@
   "buildCommand": "npm install && npm run build --workspace=client",
   "outputDirectory": "client/dist",
   "framework": "vite",
-  "ignore": [
-    "server",
-    "node_modules",
-    "*.log"
-  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
