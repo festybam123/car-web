@@ -4,10 +4,5 @@
   "framework": "vite",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "VITE_API_URL": "@vite_api_url",
-    "VITE_PAYSTACK_PUBLIC_KEY": "@vite_paystack_public_key",
-    "VITE_CLOUDINARY_CLOUD_NAME": "@vite_cloudinary_cloud_name"
-  }
+  ]
 }
