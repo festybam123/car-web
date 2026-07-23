@@ -1,23 +1,53 @@
+# Dependencies
 node_modules/
+
+# Environment variables
 .env
 .env.local
 .env.*.local
-.DS_Store
+.env.production.local
+.env.backup
+.env.old
+
+# Build output
 dist/
 build/
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+out/
+.next/
+.vercel/
+
+# Cache
+.cache/
+.vite/
+
+# IDE
 .vscode/settings.json
 .idea/
 *.swp
 *.swo
 *~
-.cache/
-.firebase/
-.vercel/
-.env.production.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test coverage
 coverage/
-.next/
-out/
+
+# Firebase
+.firebase/
+
+# Secrets and credentials
+*.pem
+*.key
+*.secret
+credentials/
+secrets/
