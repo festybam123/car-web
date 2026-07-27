@@ -2,8 +2,8 @@ import fs from 'fs'
 import path from 'path'
 import SupportTicket from '../models/SupportTicket.js'
 
-const dataDir = path.resolve('./server/logs')
-if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
+const dataDir = process.env.VERCEL ? '/tmp/logs' : path.resolve('./server/logs')
+if (!process.env.VERCEL && !fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true })
 
 export const createTicket = async (req, res, next) => {
   try {
