@@ -81,11 +81,11 @@ export default function CarCard({ car }) {
           {/* Price */}
           <div className='mb-4'>
             <div className='text-2xl font-bold gradient-text'>
-              ₦{car.price?.toLocaleString()}
+              ${car.price?.toLocaleString()}
             </div>
             {car.discountPrice && (
               <p className='text-gray-500 line-through text-sm'>
-                ₦{car.discountPrice.toLocaleString()}
+                ${car.discountPrice.toLocaleString()}
               </p>
             )}
           </div>

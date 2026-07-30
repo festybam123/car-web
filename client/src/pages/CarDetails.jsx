@@ -14,6 +14,7 @@ export default function CarDetails() {
   const [loading, setLoading] = useState(true)
   const [selectedImage, setSelectedImage] = useState(0)
   const [showBookingForm, setShowBookingForm] = useState(false)
+  const [showLightbox, setShowLightbox] = useState(false)
   const [bookingType, setBookingType] = useState('test-drive')
   const [orderSuccess, setOrderSuccess] = useState(false)
   const [orderError, setOrderError] = useState(false)
@@ -135,12 +136,14 @@ const images = car.images?.length > 0 ? car.images : ['/images/car1.jpg']
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
             {/* Main Image */}
             <div className='lg:col-span-2'>
-              <div className='w-full aspect-video bg-gray-300 rounded-lg overflow-hidden'>
+              <div className='w-full aspect-video bg-gray-300 rounded-lg overflow-hidden cursor-zoom-in'
+                onClick={() => setShowLightbox(true)}
+              >
                 <ImageWithFallback
                   src={images[selectedImage]}
                   alt={`${car.brand} ${car.model}`}
                   fallbackSrc='/images/car1.jpg'
-                  className='w-full h-full object-cover'
+                  className='w-full h-full object-cover hover:scale-105 transition-transform duration-300'
                 />
               </div>
               {images.length > 1 && (
@@ -153,7 +156,7 @@ const images = car.images?.length > 0 ? car.images : ['/images/car1.jpg']
                         idx === selectedImage ? 'border-gold-500 ring-2 ring-gold-500/30' : 'border-gray-300 hover:border-gray-400'
                       }`}
                     >
-                    <ImageWithFallback
+                      <ImageWithFallback
                         src={img}
                         alt={`Thumbnail ${idx + 1}`}
                         fallbackSrc='/images/car1.jpg'
@@ -178,11 +181,11 @@ const images = car.images?.length > 0 ? car.images : ['/images/car1.jpg']
               
               <div className='mb-6'>
                 <div className='text-4xl font-bold gradient-text mb-2'>
-                  ₦{car.price?.toLocaleString()}
+                  ${car.price?.toLocaleString()}
                 </div>
                 {car.discountPrice && (
                   <p className='text-gray-500 line-through'>
-                    ₦{car.discountPrice.toLocaleString()}
+                    ${car.discountPrice.toLocaleString()}
                   </p>
                 )}
               </div>
@@ -214,6 +217,78 @@ const images = car.images?.length > 0 ? car.images : ['/images/car1.jpg']
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {showLightbox && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className='fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4'
+            onClick={() => setShowLightbox(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.8 }}
+              className='relative max-w-5xl w-full'
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setShowLightbox(false)}
+                className='absolute top-4 right-4 text-white text-3xl hover:text-gray-300 z-10'
+              >
+                ×
+              </button>
+              <div className='relative rounded-lg overflow-hidden'>
+                <ImageWithFallback
+                  src={images[selectedImage]}
+                  alt={`${car.brand} ${car.model} - Full View`}
+                  fallbackSrc='/images/car1.jpg'
+                  className='w-full h-auto max-h-[80vh] object-contain'
+                />
+                {images.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setSelectedImage(prev => prev > 0 ? prev - 1 : images.length - 1)}
+                      className='absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors'
+                    >
+                      ‹
+                    </button>
+                    <button
+                      onClick={() => setSelectedImage(prev => prev < images.length - 1 ? prev + 1 : 0)}
+                      className='absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-3 rounded-full transition-colors'
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+              </div>
+              {images.length > 1 && (
+                <div className='flex justify-center gap-2 mt-4'>
+                  {images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setSelectedImage(idx)}
+                      className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${
+                        idx === selectedImage ? 'border-gold-500' : 'border-transparent'
+                      }`}
+                    >
+                      <ImageWithFallback
+                        src={img}
+                        alt={`Thumbnail ${idx + 1}`}
+                        fallbackSrc='/images/car1.jpg'
+                        className='w-full h-full object-cover'
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Specifications */}
       <section className='section-padding bg-white dark:bg-gray-800'>

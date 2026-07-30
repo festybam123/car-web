@@ -44,8 +44,9 @@ export default function ImageWithFallback({
     <img
       src={currentSrc}
       alt={alt}
-      className={className}
+      className={`${className} transition-transform duration-300`}
       onError={handleError}
+      loading="lazy"
       {...props}
     />
   )

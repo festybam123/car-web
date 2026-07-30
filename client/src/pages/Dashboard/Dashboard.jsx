@@ -133,7 +133,7 @@ function DashboardOverview() {
             {loading ? (
               <div className='animate-pulse bg-gray-200 dark:bg-gray-700 rounded h-10 w-24' />
             ) : (
-              <p className='text-4xl font-bold gradient-text'>₦{stats.payments.toLocaleString()}</p>
+              <p className='text-4xl font-bold gradient-text'>${stats.payments.toLocaleString()}</p>
             )}
           </div>
         </div>
