@@ -6,6 +6,7 @@ dotenv.config();
 
 const PORT = process.env.PORT || 5000;
 const MONGODB_URI = process.env.MONGODB_URI;
+const isVercel = process.env.VERCEL === '1';
 
 // MongoDB Connection
 mongoose.connect(MONGODB_URI)
@@ -51,7 +52,11 @@ async function startServer(port, attempts = 0) {
   }
 }
 
-startServer(Number(PORT) || 5000)
+if (!isVercel) {
+  startServer(Number(PORT) || 5000)
+} else {
+  console.log('Running on Vercel - skipping server.listen()')
+}
 
 // Graceful Shutdown
 process.on('SIGTERM', () => {
@@ -66,3 +71,5 @@ process.on('SIGTERM', () => {
     process.exit(0);
   }
 });
+
+export default app;
