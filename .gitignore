@@ -45,6 +45,11 @@ coverage/
 credentials/
 secrets/
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Vercel
 .vercel/
 vercel.json
