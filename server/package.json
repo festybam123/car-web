@@ -9,6 +9,9 @@
     "start": "node server.js",
     "seed": "node seed.js"
   },
+  "engines": {
+    "node": ">=18.0.0 <25.0.0"
+  },
   "keywords": [
     "car-dealership",
     "mern",
