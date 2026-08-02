@@ -51,3 +51,6 @@ coverage/
 *.secret
 credentials/
 secrets/
+
+.vercel
+.env*.local
