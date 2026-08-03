@@ -28,7 +28,7 @@ const app = express();
 
 // Serve static files (images) from public/images first, then dist/images as fallback
 const publicImagesPath = path.join(__dirname, '..', 'client', 'public', 'images')
-const distImagesPath = path.join(__dirname, '..', 'client', 'dist', 'images')
+const distImagesPath = path.join(__dirname, '..', 'dist', 'images')
 const publicImagesStatic = express.static(publicImagesPath, {
   setHeaders: (res, filepath) => {
     if (filepath.endsWith('.jpg') || filepath.endsWith('.jpeg')) {
@@ -81,7 +81,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/payments', paymentRoutes);
 
 // Serve built frontend in production
-const distPath = path.join(__dirname, '..', 'client', 'dist');
+const distPath = path.join(__dirname, '..', 'dist');
 if (existsSync(distPath)) {
   app.use(express.static(distPath));
 }
