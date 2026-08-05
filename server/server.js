@@ -9,13 +9,21 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const isVercel = process.env.VERCEL === '1';
 
 // MongoDB Connection
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, {
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+})
   .then(() => {
     console.log('✓ MongoDB connected successfully');
   })
   .catch((err) => {
     console.error('✗ MongoDB connection error:', err);
-    console.warn('Continuing without database connection. Some features may fail until MONGODB_URI is configured.');
+    if (isVercel) {
+      console.warn('Running on Vercel without database connection. Features requiring DB may fail.');
+    } else {
+      console.error('❌ Exiting because MongoDB is required for local development.');
+      process.exit(1);
+    }
   });
 
 // Server Startup with retry if port is in use
